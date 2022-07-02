@@ -1,0 +1,68 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: 礦ision V5.35.0.0
+Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: vac vaca, vaca, LIC=YA39H-W8M3I-QDNKD-8WHZ3-KUDX3-704MX
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.35.0.2
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.35.0.2
+Dialog DLL:      DARMCM1.DLL V1.19.4.0
+Target DLL:      UL2CM3.DLL V1.164.0.0
+Dialog DLL:      TARMCM1.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+G:\Users\ligh1\Desktop\杨天龙\ECB02客户资料\9.二次开发\ECB02_OPENSDK_1.0.2\project\opensdk.uvprojx
+Project File Date:  06/06/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+compiling main.c...
+..\ec_app\main.c(255): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+          ec_core_ble_send(sendBuf, strlen(sendBuf));
+..\ec_app\main.c: 1 warning, 0 errors
+linking...
+Program Size: Code=78176 RO-data=1884 RW-data=2548 ZI-data=28744  
+FromELF: creating hex file...
+After Build - User command #1: ecBuild.exe
+After Build - User command #2: copy.bat
+G:\Users\ligh1\Desktop\杨天龙\ECB02客户资料\9.二次开发\ECB02_OPENSDK_1.0.2\project>"../tool/adb/adb.exe" push "../bin/ec_open_mcu_app.hex" "/mnt/sdcard/" 
+../bin/ec_open_mcu_app.hex: 1 file pushed, 0 skipped. 369.3 MB/s (226871 bytes in 0.001s)
+".\temp\ec_open_mcu_app.axf" - 0 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
+                ARM.CMSIS.5.8.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.5.0
+   * Component: Startup Version: 1.2.2
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\Users\ligh1\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include
+  C:\Users\ligh1\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\Device\ARM\ARMCM0\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.5.0
+
+   * Component: ARM::Device:Startup:1.2.2
+      Include file:  Device\ARM\ARMCM0\Include\ARMCM0.h
+      Source file:   Device\ARM\ARMCM0\Source\ARM\startup_ARMCM0.s
+      Source file:   Device\ARM\ARMCM0\Source\system_ARMCM0.c
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
