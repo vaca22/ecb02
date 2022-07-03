@@ -72,12 +72,23 @@ int fs[70];
 int fsd[70];
 int gcc = 0;
 
+int idel = 0;
+int diffCount = 0;
+
 static void A_task(void)
 {
 
+    if(idel)
+    {
+        idel = 0;
+    }
+    else
+    {
+        ec_core_hw_timer_stop(EC_CORE_HW_TIMER1);
+        diffCount = 0;
+    }
 
-
-    //  ec_core_adc_get(EC_CORE_ADC_CH1_P6, EC_CORE_ADC_RANGE_3200MV, EC_CORE_ADC_CALIBRATION_DISABLE, &v1, &v2);
+    ec_core_adc_get(EC_CORE_ADC_CH1_P6, EC_CORE_ADC_RANGE_3200MV, EC_CORE_ADC_CALIBRATION_DISABLE, &v1, &v2);
     // sprintf(sendBuf, "%d", gcc);
 //   ec_core_ble_send(sendBuf, strlen(sendBuf));
 
@@ -106,8 +117,13 @@ static void A_task(void)
     else
     {
 
-        ec_core_gpio_out_init(EC_CORE_GPIO_P1, EC_CORE_GPIO_LEVEL_L);
-        ec_core_gpio_out_init(EC_CORE_GPIO_P2, EC_CORE_GPIO_LEVEL_L);
+        if(v1 < adcx)
+        {
+
+            ec_core_gpio_out_init(EC_CORE_GPIO_P1, EC_CORE_GPIO_LEVEL_L);
+            ec_core_gpio_out_init(EC_CORE_GPIO_P2, EC_CORE_GPIO_LEVEL_L);
+        }
+
     }
 
 
@@ -116,7 +132,7 @@ static void A_task(void)
 }
 
 
-int diffCount = 0;
+
 
 #define DIFF  2000
 
@@ -179,6 +195,8 @@ int inRange2(int a, int b)
 
 void rising(void)
 {
+    idel = 1;
+
     if(diffCount == 0)
     {
         return;
@@ -199,7 +217,7 @@ void rising(void)
 
 void failling(void)
 {
-
+    idel = 1;
 
     if(diffCount == 0)
     {
@@ -251,8 +269,32 @@ void failling(void)
             }
         }
 
-        sprintf(sendBuf, "%d,%d", s1, s2);
-        ec_core_ble_send(sendBuf, strlen(sendBuf));
+        if(s1 + s2 == 255)
+        {
+            modex = 1;
+
+            if(s1 == 22)
+            {
+                ec_core_gpio_out_init(EC_CORE_GPIO_P1, EC_CORE_GPIO_LEVEL_L);
+                ec_core_gpio_out_init(EC_CORE_GPIO_P2, EC_CORE_GPIO_LEVEL_H);
+            }
+            else if(s1 == 12)
+            {
+
+                ec_core_gpio_out_init(EC_CORE_GPIO_P1, EC_CORE_GPIO_LEVEL_H);
+                ec_core_gpio_out_init(EC_CORE_GPIO_P2, EC_CORE_GPIO_LEVEL_L);
+            }
+            else if(s1 == 24)
+            {
+                ec_core_gpio_out_init(EC_CORE_GPIO_P1, EC_CORE_GPIO_LEVEL_L);
+                ec_core_gpio_out_init(EC_CORE_GPIO_P2, EC_CORE_GPIO_LEVEL_L);
+            }
+
+//            sprintf(sendBuf, "%d,%d", s1, s2);
+//            ec_core_ble_send(sendBuf, strlen(sendBuf));
+        }
+
+
     }
 
 
